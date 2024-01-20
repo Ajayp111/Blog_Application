@@ -20,13 +20,16 @@ export default function Post({ post }) {
     setShowEditModal(false);
   };
   const handleSaveEdit = async (postId, editedPost) => {
-    const res = await fetch(`http://localhost:5000/api/posts/${postId}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ description: editedPost }),
-    });
+    const res = await fetch(
+      `https://atgtask.onrender.com/api/posts/${postId}`,
+      {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ description: editedPost }),
+      }
+    );
 
     const data = await res.json();
 
@@ -58,7 +61,7 @@ export default function Post({ post }) {
   const handleDelete = async () => {
     if (!isMine) return alert("You can't delete this post");
 
-    const res = await fetch(`http://localhost:5000/api/posts/${id}`, {
+    const res = await fetch(`https://atgtask.onrender.com/api/posts/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -83,13 +86,16 @@ export default function Post({ post }) {
       userId: userId,
     };
 
-    const res = await fetch(`http://localhost:5000/api/posts/${id}/comment`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(comment),
-    });
+    const res = await fetch(
+      `https://atgtask.onrender.com/api/posts/${id}/comment`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(comment),
+      }
+    );
     const data = await res.json();
 
     if (data.success) {
