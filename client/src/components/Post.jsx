@@ -2,10 +2,7 @@
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { BiSolidLike } from "react-icons/bi";
-import { BsTrash } from "react-icons/bs";
 import { useProvider } from "../contextAPI/context";
-import IconButton from "@material-ui/core/IconButton";
-import EditIcon from "@material-ui/icons/Edit";
 import { Modal, Button } from "react-bootstrap";
 import Comment from "./Comment";
 
@@ -143,12 +140,10 @@ export default function Post({ post }) {
             <div>
               {isMine && (
                 <div className="flex gap-x-2">
-                  <IconButton onClick={handleEdit}>
-                    <EditIcon />
-                  </IconButton>
-                  <IconButton className="text-red-500" onClick={handleDelete}>
-                    <BsTrash size={25} />
-                  </IconButton>
+                  <button onClick={handleEdit}>Edit</button>
+                  <button className="text-red-500" onClick={handleDelete}>
+                    Delete
+                  </button>
                 </div>
               )}
             </div>
