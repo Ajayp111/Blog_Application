@@ -31,7 +31,7 @@ export default function Nav() {
                   userId?.username ? "bg-orange-600" : "bg-red-600"
                 }`}
               >
-                {userId ? userId?.username : "No User Logged In"}
+                {userId ? userId?.username : "Not An User"}
               </span>
             </p>
           </div>

@@ -65,7 +65,7 @@ const Signup = () => {
         </div>
         <p className="text-center text-lg my-5">
           Already have an account?{" "}
-          <RouterLink to="/login" className="text-indigo-500">
+          <RouterLink to="/login" className="text-orange-500">
             Sign In
           </RouterLink>
         </p>

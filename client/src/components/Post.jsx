@@ -130,59 +130,70 @@ export default function Post({ post }) {
   return (
     <div className="my-5">
       <div>
-        <div className="shad p-5 rounded-lg">
+        <div className="shadow-lg p-6 rounded-lg border border-gray-200">
           <p className="text-sm">
-            <span>Posted By : </span>
-            <span className="font-[500]">{post?.user?.username} </span>
+            <span>Posted By:</span>{" "}
+            <span className="font-semibold">{post?.user?.username}</span>
           </p>
-          <div className="flex items-center justify-between gap-x-2">
-            <h1 className="text-xl font-bold my-2">{post.title}</h1>
+          <div className="flex items-center justify-between gap-4">
+            <h1 className="text-2xl font-bold my-2">{post.title}</h1>
             <div>
               {isMine && (
-                <div className="flex gap-x-2">
-                  <button onClick={handleEdit}>Edit</button>
-                  <button className="text-red-500" onClick={handleDelete}>
+                <div className="flex gap-4">
+                  <button
+                    className="text-orange-500 hover:underline"
+                    onClick={handleEdit}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="text-red-500 hover:underline"
+                    onClick={handleDelete}
+                  >
                     Delete
                   </button>
                 </div>
               )}
             </div>
           </div>
-          <p>{post.description}</p>
-          <div className="my-2 flex items-center gap-x-5">
-            <button onClick={handleLike}>
+          <p className="text-gray-700">{post.description}</p>
+          <div className="my-4 flex items-center gap-4">
+            <button onClick={handleLike} className="flex items-center">
               {like ? (
                 <BiSolidLike size={25} className="text-orange-500" />
               ) : (
                 <BiSolidLike size={25} />
               )}
+              <span className="ml-2">{post.likes.length}</span>
             </button>
-            <p>{post.likes.length} Peoples liked this</p>
           </div>
           <div className="my-3">
             <form onSubmit={handleComment}>
               <textarea
                 type="text"
-                className="px-5 py-2 bg-gray-300 my-2 rounded"
+                className="w-full px-4 py-2 bg-gray-100 my-2 rounded"
                 name="comment"
                 placeholder="Write a comment"
               />
               <br />
               <input
                 type="submit"
-                className="cursor-pointer px-5 py-1 bg-orange-500 text-white rounded"
-                value={"Post comment"}
+                className="cursor-pointer px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600"
+                value="Post comment"
               />
             </form>
           </div>
 
           <div>
-            <h1>Comments</h1>
-            <button className="text-orange-500" onClick={toggleComments}>
+            <h1 className="text-lg font-semibold">Comments</h1>
+            <button
+              className="text-orange-500 hover:underline"
+              onClick={toggleComments}
+            >
               {showComments ? "Hide Comments" : "View Comments"}
             </button>
             {showComments && (
-              <div className="comments-section max-h-32 overflow-y-auto">
+              <div className="max-h-32 overflow-y-auto">
                 {post.comments.map((comment) => (
                   <Comment comment={comment} key={comment._id} />
                 ))}

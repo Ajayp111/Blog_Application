@@ -49,20 +49,22 @@ export default function Reset() {
     <div className="mt-20">
       <Toaster />
       {error && (
-        <h2 className="text-center text-red-500 font-[500]">{error}</h2>
+        <h2 className="text-center text-orange-500 font-[500]">{error}</h2>
       )}
       <h2 className="text-center my-5 font-[500]">
         Already have an account ?
-        <span className="bg-indigo-600 text-white ml-2 px-2 py-1 border rounded">
+        <span className="bg-orange-600 text-white ml-2 px-2 py-1 border rounded">
           <Link to="/login"> Sign In</Link>
         </span>
       </h2>
-      <h2 className="text-center my-5 font-[500]">Reset Password</h2>
+      <h2 className="text-center my-5 font-[500] text-orange-500">
+        Reset Password
+      </h2>
       <div className="flex justify-center items-center ">
         <form className="shad p-10 rounded-lg" onSubmit={handleReset}>
           <input
             type="text"
-            className="px-5 py-2 rounded bg-slate-300 placeholder-black"
+            className="px-5 py-2 rounded bg-orange-300 placeholder-black"
             name="email"
             placeholder="Enter Email"
             onChange={(e) => setEmail(e.target.value)}
@@ -70,7 +72,7 @@ export default function Reset() {
           <br />
           <input
             type="text"
-            className="px-5 py-2 rounded bg-slate-300 placeholder-black my-5"
+            className="px-5 py-2 rounded bg-orange-300 placeholder-black my-5"
             name="username"
             placeholder="Enter Username"
             onChange={(e) => setUsername(e.target.value)}
@@ -78,7 +80,7 @@ export default function Reset() {
           <br />
           <input
             type="password"
-            className="px-5 py-2 rounded bg-slate-300  placeholder-black"
+            className="px-5 py-2 rounded bg-orange-300  placeholder-black"
             name="password"
             placeholder="Enter New Password"
             onChange={(e) => setPassword(e.target.value)}
@@ -87,7 +89,7 @@ export default function Reset() {
           <input
             type="button"
             value="Reset Password"
-            className="px-5 py-2 rounded bg-indigo-700 hover:bg-indigo-800 text-white font-bold cursor-pointer my-5"
+            className="px-5 py-2 rounded bg-orange-700 hover:bg-orange-800 text-white font-bold cursor-pointer my-5"
             onClick={handleReset}
           />
         </form>
