@@ -25,7 +25,7 @@ export default function CreatePost() {
       user: userId,
     };
 
-    const res = await fetch(`https://atgtask.onrender.com/api/posts`, {
+    const res = await fetch(`https://atgtask.onrender.com//api/posts`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -45,7 +45,7 @@ export default function CreatePost() {
   return (
     <div className="my-5 shadow rounded-xl ">
       <div className="p-5">
-        <h1 className="text-2xl py-3 text-green-500 font-bold text-center mb-5 border border-green-500 rounded-md">
+        <h1 className="text-2xl py-3 text-orange-500 font-bold text-center mb-5 border border-orange-500 rounded-md">
           Create New Post
         </h1>
         <form onSubmit={createPost}>
@@ -63,7 +63,7 @@ export default function CreatePost() {
           ></textarea>
           <button
             type="submit"
-            className="bg-green-500 text-white rounded-full py-2 px-4 w-full cursor-pointer"
+            className="bg-orange-500 text-white rounded-full py-2 px-4 w-full cursor-pointer"
           >
             Create Post
           </button>

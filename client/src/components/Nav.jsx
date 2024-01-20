@@ -28,7 +28,7 @@ export default function Nav() {
               Logged In User :{" "}
               <span
                 className={`text-white px-2 py-1 rounded-3xl font-bold ${
-                  userId?.username ? "bg-green-600" : "bg-red-600"
+                  userId?.username ? "bg-orange-600" : "bg-red-600"
                 }`}
               >
                 {userId ? userId?.username : "No User Logged In"}
@@ -47,7 +47,7 @@ export default function Nav() {
                 </span>
               </button>
             ) : (
-              <button className="px-5 py-2 bg-green-500 text-white font-bold rounded-lg my-5 sm:my-0">
+              <button className="px-5 py-2 bg-orange-500 text-white font-bold rounded-lg my-5 sm:my-0">
                 <Link to="/login">Login</Link>
               </button>
             )}

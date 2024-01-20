@@ -1,4 +1,4 @@
-import cse from "../../public/banner000.jpg";
+import cse from "../../public/banner222.webp";
 
 const Header = () => {
   return (

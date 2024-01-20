@@ -58,7 +58,7 @@ export default function Login() {
         </div>
         <p className="text-center text-lg my-5">
           Do not have an account ?
-          <span className="bg-green-500 text-white ml-2 px-2 py-1 border rounded ">
+          <span className="bg-orange-500 text-white ml-2 px-2 py-1 border rounded ">
             <RouterLink to="/signup"> Register</RouterLink>
           </span>
         </p>
@@ -83,7 +83,7 @@ export default function Login() {
 
             <button
               type="submit"
-              className="w-full bg-green-500 text-white p-2 rounded"
+              className="w-full bg-orange-500 text-white p-2 rounded"
               onClick={handleLogin}
             >
               Login

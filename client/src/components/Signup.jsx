@@ -103,7 +103,7 @@ const Signup = () => {
             </div>
             <button
               type="submit"
-              className="w-full bg-green-500 text-white p-2 rounded"
+              className="w-full bg-orange-500 text-white p-2 rounded"
             >
               Create Account
             </button>

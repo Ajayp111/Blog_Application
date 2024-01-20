@@ -157,7 +157,7 @@ export default function Post({ post }) {
           <div className="my-2 flex items-center gap-x-5">
             <button onClick={handleLike}>
               {like ? (
-                <BiSolidLike size={25} className="text-green-500" />
+                <BiSolidLike size={25} className="text-orange-500" />
               ) : (
                 <BiSolidLike size={25} />
               )}
@@ -175,7 +175,7 @@ export default function Post({ post }) {
               <br />
               <input
                 type="submit"
-                className="cursor-pointer px-5 py-1 bg-green-500 text-white rounded"
+                className="cursor-pointer px-5 py-1 bg-orange-500 text-white rounded"
                 value={"Post comment"}
               />
             </form>
@@ -183,7 +183,7 @@ export default function Post({ post }) {
 
           <div>
             <h1>Comments</h1>
-            <button className="text-green-500" onClick={toggleComments}>
+            <button className="text-orange-500" onClick={toggleComments}>
               {showComments ? "Hide Comments" : "View Comments"}
             </button>
             {showComments && (
@@ -195,7 +195,7 @@ export default function Post({ post }) {
             )}
           </div>
         </div>
-        <div className="text-center max-h-32 border border-green-400">
+        <div className="text-center max-h-32 border border-orange-400">
           <Modal
             show={showEditModal}
             onHide={handleCloseEditModal}
