@@ -30,7 +30,7 @@ const Provider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch("http://localhost:5000/api/posts");
+      const response = await fetch("https://atgtask.onrender.com/api/posts");
       const data = await response.json();
       if (data.data.length) {
         dispatch({

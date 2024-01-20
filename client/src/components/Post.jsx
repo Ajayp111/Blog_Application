@@ -102,13 +102,16 @@ export default function Post({ post }) {
   const handleLike = async () => {
     if (!userId) return alert("Please login to like a post");
 
-    const res = await fetch(`http://localhost:5000/api/posts/${id}/like`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ userId: userId }),
-    });
+    const res = await fetch(
+      `https://atgtask.onrender.com/api/posts/${id}/like`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId: userId }),
+      }
+    );
 
     const data = await res.json();
 

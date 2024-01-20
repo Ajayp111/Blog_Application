@@ -25,7 +25,7 @@ export default function CreatePost() {
       user: userId,
     };
 
-    const res = await fetch(`http://localhost:5000/api/posts`, {
+    const res = await fetch(`https://atgtask.onrender.com/api/posts`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

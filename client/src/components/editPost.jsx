@@ -9,7 +9,7 @@ const EditPost = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/posts/${id}`);
+        const res = await fetch(`https://atgtask.onrender.com/api/posts/${id}`);
         const data = await res.json();
 
         if (data.success) {
@@ -29,7 +29,7 @@ const EditPost = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch(`http://localhost:5000/api/posts/${id}`, {
+      const res = await fetch(`https://atgtask.onrender.com/api/posts/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
