@@ -1,6 +1,3 @@
-const express = require("express");
-const multer = require("multer");
-
 const {
   createPost,
   getAllPosts,
@@ -11,36 +8,29 @@ const {
   commentPost,
 } = require("../controllers/postController");
 
-const router = express.Router();
+const router = require("express").Router();
+const multer = require("multer");
 
-// Multer configuration for image upload
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "images/");
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  },
-});
-
+// Define multer storage and file filter
+const storage = multer.memoryStorage(); //
 const upload = multer({ storage: storage });
 
-// Image upload route
-router.post("/upload", upload.single("file"), (req, res) => {
-  res.json({
-    success: true,
-    message: "Image uploaded successfully",
-    imageUrl: `images/${req.file.filename}`,
-  });
+router.route("/image").post(upload.single("file"), async function (req, res) {
+  try {
+    res.json({ success: true });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
-// Post-related routes
-router.route("/").post(createPost).get(getAllPosts);
-
-router.route("/:id").get(getPost).put(updatePost).delete(deletePost);
+// Post routes
+router.route("/").post(upload.single("image"), createPost).get(getAllPosts);
 
 router.route("/:id/like").put(likeUnlikePost);
 
 router.route("/:id/comment").put(commentPost);
+
+router.route("/:id").put(updatePost).get(getPost).delete(deletePost);
 
 module.exports = router;

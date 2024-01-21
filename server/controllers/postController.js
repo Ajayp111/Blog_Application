@@ -1,43 +1,16 @@
 const Post = require("../models/Post");
-const multer = require("multer");
-const path = require("path");
 
-// Multer configuration for image upload
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "images/");
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  },
-});
-
-const upload = multer({ storage: storage });
-
-const createPost = upload.single("file", async (req, res) => {
+const createPost = async (req, res) => {
   try {
-    const { title, description, user } = req.body;
+    const newPost = await Post.create(req.body);
 
-    // Check if image file exists
-    const imageUrl = req.file ? `images/${req.file.filename}` : null;
-
-    const newPost = await Post.create({
-      title,
-      description,
-      user,
-      image: imageUrl,
-    });
-
-    res.status(201).json({
-      message: "New Post created",
-      data: newPost,
-      success: true,
-    });
+    res
+      .status(201)
+      .json({ message: `New Post created `, data: newPost, success: true });
   } catch (error) {
-    console.error(error);
-    res.json({ message: error.message, success: false });
+    res.json({ message: error, success: false });
   }
-});
+};
 
 const getAllPosts = async (req, res) => {
   try {

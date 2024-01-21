@@ -4,7 +4,6 @@ const port = process.env.PORT || 5000;
 const cors = require("cors");
 const connectDB = require("./config/db");
 const morgan = require("morgan");
-const multer = require("multer");
 const helmet = require("helmet");
 const authRouter = require("./routes/authRoute");
 const postRouter = require("./routes/postRoute");
@@ -17,6 +16,18 @@ app.use(cors());
 app.use(helmet());
 app.use(morgan("common"));
 
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "images/");
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
 // api
 
 app.use("/api", authRouter);

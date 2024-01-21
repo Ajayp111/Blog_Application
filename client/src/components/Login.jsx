@@ -19,7 +19,7 @@ export default function Login() {
       return;
     }
 
-    const res = await fetch("https://atgtask.onrender.com/api/login", {
+    const res = await fetch("http://localhost:5000/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

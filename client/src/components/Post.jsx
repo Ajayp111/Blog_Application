@@ -15,16 +15,13 @@ export default function Post({ post }) {
   };
 
   const handleSaveEdit = async (postId, editedPost) => {
-    const res = await fetch(
-      `https://atgtask.onrender.com/api/posts/${postId}`,
-      {
-        method: "PUT",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({ description: editedPost }),
-      }
-    );
+    const res = await fetch(`http://localhost:5000/api/posts/${postId}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ description: editedPost }),
+    });
 
     const data = await res.json();
 
@@ -56,7 +53,7 @@ export default function Post({ post }) {
   const handleDelete = async () => {
     if (!isMine) return alert("You can't delete this post");
 
-    const res = await fetch(`https://atgtask.onrender.com/api/posts/${id}`, {
+    const res = await fetch(`http://localhost:5000/api/posts/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -81,16 +78,13 @@ export default function Post({ post }) {
       userId: userId,
     };
 
-    const res = await fetch(
-      `https://atgtask.onrender.com/api/posts/${id}/comment`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(comment),
-      }
-    );
+    const res = await fetch(`http://localhost:5000/api/posts/${id}/comment`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(comment),
+    });
     const data = await res.json();
 
     if (data.success) {
@@ -103,16 +97,13 @@ export default function Post({ post }) {
   const handleLike = async () => {
     if (!userId) return alert("Please login to like a post");
 
-    const res = await fetch(
-      `https://atgtask.onrender.com/api/posts/${id}/like`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userId: userId }),
-      }
-    );
+    const res = await fetch(`http://localhost:5000/api/posts/${id}/like`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userId: userId }),
+    });
 
     const data = await res.json();
 
@@ -137,7 +128,7 @@ export default function Post({ post }) {
           {/* Display the image if it exists */}
           {post.image && (
             <img
-              src={`https://atgtask.onrender.com/${post.image}`}
+              src={`http://localhost:5000/api/posts/${post.image}`}
               alt="Post Image"
               className="my-2 rounded-lg"
             />

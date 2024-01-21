@@ -15,8 +15,8 @@ const postSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    image: {
-      type: String, // Assuming the image field stores the relative path of the image
+    photo: {
+      type: String,
     },
     likes: {
       type: [

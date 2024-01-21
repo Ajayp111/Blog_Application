@@ -1,28 +1,22 @@
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { useProvider } from "../contextAPI/context";
+import axios from "axios"; // Make sure to import axios
 
 const CreatePost = () => {
   const userId = JSON.parse(localStorage.getItem("loggedUser"))?.id;
   const { forceUpdate } = useProvider();
 
   // State for handling image upload
-  const [image, setImage] = useState({
-    file: null,
-    preview: null,
-  });
+  const [file, setFile] = useState(null);
 
   // Function to handle file change
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
-
-    // Update the state with the selected file and its preview
-    setImage({
-      file: selectedFile,
-      preview: URL.createObjectURL(selectedFile),
-    });
+    setFile(selectedFile);
   };
 
+  // Function to handle form submission with image upload
   // Function to handle form submission with image upload
   const createPost = async (e) => {
     e.preventDefault();
@@ -36,6 +30,7 @@ const CreatePost = () => {
       return;
     }
 
+    // Construct the post object
     const post = {
       title: e.target.title.value,
       description: e.target.description.value,
@@ -44,56 +39,52 @@ const CreatePost = () => {
       user: userId,
     };
 
-    // Check if an image is selected
-    if (image.file) {
-      const formData = new FormData();
-      formData.append("file", image.file);
+    // Handle image upload
+    if (file) {
+      const data = new FormData();
+      const filename = Date.now() + file.name;
+      data.append("img", filename);
+      data.append("file", file);
+      post.photo = filename;
 
       try {
-        // Upload the image to the server
-        const uploadRes = await fetch(
-          "https://atgtask.onrender.com/api/upload",
-          {
-            method: "POST",
-            body: formData,
-          }
+        // Send image upload request
+        const imgUpload = await axios.post(
+          "http://localhost:5000/api/posts/image",
+          data
         );
-
-        const uploadData = await uploadRes.json();
-
-        if (uploadData.success) {
-          // Attach the image URL to the post data
-          post.image = uploadData.imageUrl;
-        } else {
-          toast.error("Error uploading the image");
-          return;
-        }
-      } catch (error) {
-        console.error("Error uploading the image:", error);
-        toast.error("Error uploading the image");
+        console.log(imgUpload.data);
+        console.log("image part is done");
+      } catch (err) {
+        console.log("img upload error", err);
+        toast.error("Failed to upload image");
         return;
       }
     }
 
-    const res = await fetch(`https://atgtask.onrender.com/api/posts`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(post),
-    });
-
-    const data = await res.json();
-    if (data.success) {
-      toast.success("Post added successfully");
-      forceUpdate();
-      e.target.title.value = "";
-      e.target.description.value = "";
-      // Clear the image state after successful post creation
-      setImage({
-        file: null,
-        preview: null,
+    try {
+      // Send request to create post
+      const res = await fetch("http://localhost:5000/api/posts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(post),
       });
+
+      const data = await res.json();
+      if (data.success) {
+        toast.success("Post added successfully");
+        forceUpdate();
+        e.target.title.value = "";
+        e.target.description.value = "";
+        setFile(null);
+      } else {
+        toast.error("Failed to create post");
+      }
+    } catch (err) {
+      console.log(err);
+      toast.error("Failed to create post");
     }
   };
 
@@ -117,14 +108,10 @@ const CreatePost = () => {
             className="border rounded w-full p-2 mb-4"
           ></textarea>
           <input
+            onChange={(e) => handleFileChange(e)}
             type="file"
-            name="file"
-            onChange={handleFileChange}
-            accept="image/*"
+            className="px-4"
           />
-          {image.preview && (
-            <img src={image.preview} width="100" height="100" alt="Preview" />
-          )}
           <button
             type="submit"
             className="bg-orange-500 text-white rounded-full py-2 px-4 w-full cursor-pointer"
