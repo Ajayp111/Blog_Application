@@ -133,6 +133,16 @@ export default function Post({ post }) {
             <span>Posted By:</span>{" "}
             <span className="font-semibold">{post?.user?.username}</span>
           </p>
+
+          {/* Display the image if it exists */}
+          {post.image && (
+            <img
+              src={`https://atgtask.onrender.com/${post.image}`}
+              alt="Post Image"
+              className="my-2 rounded-lg"
+            />
+          )}
+
           <div className="flex items-center justify-between gap-4">
             <h1 className="text-2xl font-bold my-2">{post.title}</h1>
             <div>

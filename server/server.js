@@ -4,6 +4,7 @@ const port = process.env.PORT || 5000;
 const cors = require("cors");
 const connectDB = require("./config/db");
 const morgan = require("morgan");
+const multer = require("multer");
 const helmet = require("helmet");
 const authRouter = require("./routes/authRoute");
 const postRouter = require("./routes/postRoute");

@@ -1,10 +1,29 @@
+import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { useProvider } from "../contextAPI/context";
 
-export default function CreatePost() {
+const CreatePost = () => {
   const userId = JSON.parse(localStorage.getItem("loggedUser"))?.id;
   const { forceUpdate } = useProvider();
 
+  // State for handling image upload
+  const [image, setImage] = useState({
+    file: null,
+    preview: null,
+  });
+
+  // Function to handle file change
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+
+    // Update the state with the selected file and its preview
+    setImage({
+      file: selectedFile,
+      preview: URL.createObjectURL(selectedFile),
+    });
+  };
+
+  // Function to handle form submission with image upload
   const createPost = async (e) => {
     e.preventDefault();
 
@@ -25,6 +44,37 @@ export default function CreatePost() {
       user: userId,
     };
 
+    // Check if an image is selected
+    if (image.file) {
+      const formData = new FormData();
+      formData.append("file", image.file);
+
+      try {
+        // Upload the image to the server
+        const uploadRes = await fetch(
+          "https://atgtask.onrender.com/api/upload",
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
+
+        const uploadData = await uploadRes.json();
+
+        if (uploadData.success) {
+          // Attach the image URL to the post data
+          post.image = uploadData.imageUrl;
+        } else {
+          toast.error("Error uploading the image");
+          return;
+        }
+      } catch (error) {
+        console.error("Error uploading the image:", error);
+        toast.error("Error uploading the image");
+        return;
+      }
+    }
+
     const res = await fetch(`https://atgtask.onrender.com/api/posts`, {
       method: "POST",
       headers: {
@@ -39,11 +89,16 @@ export default function CreatePost() {
       forceUpdate();
       e.target.title.value = "";
       e.target.description.value = "";
+      // Clear the image state after successful post creation
+      setImage({
+        file: null,
+        preview: null,
+      });
     }
   };
 
   return (
-    <div className="my-5 shadow rounded-xl ">
+    <div className="my-5 shadow rounded-xl">
       <div className="p-5">
         <h1 className="text-2xl py-3 text-orange-500 font-bold text-center mb-5 border border-orange-500 rounded-md">
           Create New Post
@@ -61,6 +116,15 @@ export default function CreatePost() {
             rows={4}
             className="border rounded w-full p-2 mb-4"
           ></textarea>
+          <input
+            type="file"
+            name="file"
+            onChange={handleFileChange}
+            accept="image/*"
+          />
+          {image.preview && (
+            <img src={image.preview} width="100" height="100" alt="Preview" />
+          )}
           <button
             type="submit"
             className="bg-orange-500 text-white rounded-full py-2 px-4 w-full cursor-pointer"
@@ -71,4 +135,6 @@ export default function CreatePost() {
       </div>
     </div>
   );
-}
+};
+
+export default CreatePost;
