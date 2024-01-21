@@ -7,7 +7,7 @@ import ImageCarousel from "./ImageCarousel";
 
 export default function Home() {
   return (
-    <div className="p-5 md:px-10 py-10">
+    <div className="p-2 md:px-8 py-2">
       <Toaster />
       <Nav />
       <ImageCarousel />

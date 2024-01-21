@@ -43,14 +43,14 @@ const CreatePost = () => {
     if (file) {
       const data = new FormData();
       const filename = Date.now() + file.name;
-      data.append("img", filename);
+      data.append("photo", filename);
       data.append("file", file);
       post.photo = filename;
 
       try {
         // Send image upload request
         const imgUpload = await axios.post(
-          "http://localhost:5000/api/posts/image",
+          "https://atgtask.onrender.com/api/posts/image",
           data
         );
         console.log(imgUpload.data);
@@ -64,7 +64,7 @@ const CreatePost = () => {
 
     try {
       // Send request to create post
-      const res = await fetch("http://localhost:5000/api/posts", {
+      const res = await fetch("https://atgtask.onrender.com/api/posts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -110,7 +110,7 @@ const CreatePost = () => {
           <input
             onChange={(e) => handleFileChange(e)}
             type="file"
-            className="px-4"
+            className="px-4 py-3"
           />
           <button
             type="submit"
