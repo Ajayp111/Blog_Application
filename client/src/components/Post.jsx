@@ -12,9 +12,7 @@ export default function Post({ post }) {
 
   const handleCloseEditModal = () => {
     setEditPost(null);
-    // setShowEditModal(false);
   };
-  // Add these lines inside your component
 
   const handleSaveEdit = async (postId, editedPost) => {
     const res = await fetch(
@@ -33,7 +31,7 @@ export default function Post({ post }) {
     if (data.success) {
       toast.success("Post updated");
       forceUpdate();
-      // handleCloseEditModal();
+      handleCloseEditModal();
     }
   };
 

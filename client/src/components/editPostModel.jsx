@@ -1,7 +1,17 @@
 /* eslint-disable react/prop-types */
 
 import { Modal, Button } from "react-bootstrap";
+
 const EditPostModal = ({ editPost, handleSaveEdit, handleCloseEditModal }) => {
+  const handleSave = (e) => {
+    e.preventDefault();
+    handleSaveEdit(
+      editPost._id,
+      e.target.editpostText.value,
+      handleCloseEditModal
+    );
+  };
+
   return (
     <Modal
       show={editPost !== null}
@@ -16,12 +26,7 @@ const EditPostModal = ({ editPost, handleSaveEdit, handleCloseEditModal }) => {
         <Modal.Title className="text-center">Edit Post</Modal.Title>
       </Modal.Header>
       <Modal.Body style={{ maxHeight: "80vh", overflowY: "auto" }}>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleSaveEdit(editPost._id, e.target.editpostText.value);
-          }}
-        >
+        <form onSubmit={handleSave}>
           <div className="d-flex justify-content-center align-items-center mb-3 text-center">
             <textarea
               type="text"
@@ -35,13 +40,14 @@ const EditPostModal = ({ editPost, handleSaveEdit, handleCloseEditModal }) => {
             <Button
               type="submit"
               className="p-2"
-              style={{ backgroundColor: " #4CAF50", color: "#ffffff" }}
+              style={{ backgroundColor: "#e86100", color: "#ffffff" }}
             >
               Save
             </Button>
             <Button
               variant="secondary"
               className="ml-4"
+              style={{ backgroundColor: " #4CAF50", color: "#ffffff" }}
               onClick={handleCloseEditModal}
             >
               Cancel
