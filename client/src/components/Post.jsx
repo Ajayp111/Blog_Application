@@ -128,7 +128,7 @@ export default function Post({ post }) {
   };
 
   return (
-    <div className="my-5">
+    <div className="my-2">
       <div>
         <div className="shadow-lg p-6 rounded-lg border border-gray-200">
           <p className="text-sm">
