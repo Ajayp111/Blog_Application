@@ -3,6 +3,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import cse from "../../public/Computer Engineering.png";
 import logo from "../../public/Logo.png";
+
 const Signup = () => {
   const navigate = useNavigate();
   const [error, setError] = useState("");
@@ -45,30 +46,30 @@ const Signup = () => {
   };
 
   return (
-    <>
-      <div className="container mx-auto ">
+    <div className="bg-gray-100 min-h-screen flex items-center justify-center">
+      <div className="container mx-auto p-4">
         <Toaster />
         {error && <p className="text-red-600 text-center mb-5">{error}</p>}
-        <div>
-          <img
-            src={logo}
-            className="object-cover max-w-full mr-7 py-7 justify-center items-center px-6"
-            alt="logo"
-          />
+
+        <div className="text-center mb-5">
+          <img src={logo} className="mx-auto mb-7" alt="logo" />
         </div>
-        <div className="relative">
+
+        <div className="relative mb-4">
           <img
             src={cse}
-            className="w-full h-64 object-cover max-w-full"
+            className="w-full h-48 object-cover max-w-full"
             alt="cse"
           />
         </div>
+
         <p className="text-center text-lg my-5">
           Already have an account?{" "}
           <RouterLink to="/login" className="text-orange-500">
             Sign In
           </RouterLink>
         </p>
+
         <div className="flex justify-center items-center">
           <form onSubmit={handleSignup} className="w-full max-w-md">
             <div className="mb-4">
@@ -110,7 +111,7 @@ const Signup = () => {
           </form>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

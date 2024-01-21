@@ -3,19 +3,19 @@ import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { BiSolidLike } from "react-icons/bi";
 import { useProvider } from "../contextAPI/context";
-import { Modal, Button } from "react-bootstrap";
 import Comment from "./Comment";
-
+import EditPostModal from "./editPostModel";
 export default function Post({ post }) {
   const [editPost, setEditPost] = useState(null);
-  const [showEditModal, setShowEditModal] = useState(false);
   const { forceUpdate } = useProvider();
   const userId = JSON.parse(localStorage.getItem("loggedUser"))?.id;
 
   const handleCloseEditModal = () => {
     setEditPost(null);
-    setShowEditModal(false);
+    // setShowEditModal(false);
   };
+  // Add these lines inside your component
+
   const handleSaveEdit = async (postId, editedPost) => {
     const res = await fetch(
       `https://atgtask.onrender.com/api/posts/${postId}`,
@@ -33,13 +33,13 @@ export default function Post({ post }) {
     if (data.success) {
       toast.success("Post updated");
       forceUpdate();
-      handleCloseEditModal();
+      // handleCloseEditModal();
     }
   };
 
   const handleEdit = () => {
     setEditPost(post);
-    setShowEditModal(true);
+    // setShowEditModal(true);
   };
   const [showComments, setShowComments] = useState(false);
 
@@ -201,52 +201,15 @@ export default function Post({ post }) {
             )}
           </div>
         </div>
-        <div className="text-center max-h-32 border border-orange-400">
-          <Modal
-            show={showEditModal}
-            onHide={handleCloseEditModal}
-            dialogClassName="modal-90w"
-            centered
-          >
-            <Modal.Header closeButton>
-              <Modal.Title className="text-center">Edit Post</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  handleSaveEdit(id, e.target.editpostText.value);
-                }}
-              >
-                <div className="d-flex justify-content-center align-items-center mb-3 text-center">
-                  <textarea
-                    type="text"
-                    className="form-control my-2 border border-spacing-10 border-cyan-900 px-3"
-                    name="editpostText"
-                    placeholder="Edit your post here"
-                    defaultValue={editPost?.description}
-                  />
-                </div>
-                <div className="d-flex justify-content-center text-center pb-8">
-                  {" "}
-                  <Button
-                    type="submit"
-                    className="p-2"
-                    style={{ backgroundColor: " #4CAF50", color: "#ffffff" }}
-                  >
-                    Save
-                  </Button>
-                  <Button
-                    variant="secondary"
-                    className="ml-4"
-                    onClick={handleCloseEditModal}
-                  >
-                    Cancel
-                  </Button>
-                </div>
-              </form>
-            </Modal.Body>
-          </Modal>
+        <div
+          style={{ margin: "10px", marginBottom: "10px" }}
+          className="border border-orange-400"
+        >
+          <EditPostModal
+            editPost={editPost}
+            handleSaveEdit={handleSaveEdit}
+            handleCloseEditModal={handleCloseEditModal}
+          />
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@ import { FiLogOut } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { useProvider } from "../contextAPI/context";
 import logo from "../../public/Logo.png";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function Nav() {
   const userId = JSON.parse(localStorage.getItem("loggedUser"));
@@ -35,22 +36,33 @@ export default function Nav() {
               </span>
             </p>
           </div>
-          <div>
-            {userId?.username ? (
-              <button
-                className="flex items-center gap-2 text-white bg-red-600 px-4 py-2 rounded-3xl my-5 sm:my-0"
-                onClick={handleLogout}
-              >
-                Log Out
-                <span>
-                  <FiLogOut />
-                </span>
-              </button>
-            ) : (
-              <button className="px-5 py-2 bg-orange-500 text-white font-bold rounded-lg my-5 sm:my-0">
-                <Link to="/login">Login</Link>
-              </button>
-            )}
+          <div className="flex items-center space-x-4 justify-center flex-grow">
+            {/* Bootstrap Search Bar */}
+            <div className="col-md-6">
+              <input
+                className="form-control border-orange-500"
+                type="text"
+                placeholder="Search"
+              />
+            </div>
+            <div className="flex space-x-4"></div>
+            <div className="flex space-x-4 lg:space-x-7">
+              {userId?.username ? (
+                <button
+                  className="flex items-center gap-2 text-white bg-red-600 px-4 py-2 rounded-3xl my-3 sm:my-0"
+                  onClick={handleLogout}
+                >
+                  Log Out
+                  <span>
+                    <FiLogOut />
+                  </span>
+                </button>
+              ) : (
+                <button className="px-5 py-2 bg-orange-500 text-white font-bold rounded-lg ml-6 mr-3 m-3 sm:my-0">
+                  <Link to="/login">Login</Link>
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </nav>
