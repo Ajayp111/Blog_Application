@@ -2,7 +2,7 @@ import { toast } from "react-hot-toast";
 import { FiLogOut } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { useProvider } from "../contextAPI/context";
-import logo from "../../public/Logo.png";
+// import logo from "../../public/Logo.png";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function Nav() {
@@ -19,7 +19,7 @@ export default function Nav() {
     <>
       <div className="d-flex py-3 px-2 pr-0 px-md-5 justify-content-between align-items-center">
         <span>
-          <img src={logo} alt="" width="120px" height="18px" />
+          {/* <img src={logo} alt="" width="120px" height="18px" /> */}
         </span>
       </div>
       <nav className="py-6">

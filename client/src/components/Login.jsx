@@ -2,8 +2,8 @@ import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useProvider } from "../contextAPI/context";
-import cse from "../../public/Computer Engineering.png";
-import logo from "../../public/Logo.png";
+// import cse from "../../public/Computer Engineering.png";
+// import logo from "../../public/Logo.png";
 export default function Login() {
   const navigate = useNavigate();
   const { setLoggedUser } = useProvider();
@@ -48,14 +48,14 @@ export default function Login() {
         {error && <p className="text-red-600 text-center mb-5">{error}</p>}
         <div>
           <img
-            src={logo}
+            // src={logo}
             className="object-cover mr-7 py-7 justify-center items-center px-6"
-            alt="logo"
+            // alt="logo"
           />
         </div>
-        <div className="relative">
+        {/* <div className="relative">
           <img src={cse} className="w-full h-64 object-cover" alt="cse" />
-        </div>
+        </div> */}
         <p className="text-center text-lg my-5">
           Do not have an account ?
           <span className="bg-orange-500 text-white ml-2 px-2 py-1 border rounded ">

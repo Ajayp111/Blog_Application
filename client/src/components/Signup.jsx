@@ -1,8 +1,8 @@
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
-import cse from "../../public/Computer Engineering.png";
-import logo from "../../public/Logo.png";
+// import cse from "../../public/Computer Engineering.png";
+// import logo from "../../public/Logo.png";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -51,17 +51,17 @@ const Signup = () => {
         <Toaster />
         {error && <p className="text-red-600 text-center mb-5">{error}</p>}
 
-        <div className="text-center mb-5">
+        {/* <div className="text-center mb-5">
           <img src={logo} className="mx-auto mb-7" alt="logo" />
-        </div>
+        </div> */}
 
-        <div className="relative mb-4">
+        {/* <div className="relative mb-4">
           <img
             src={cse}
             className="w-full h-48 object-cover max-w-full"
             alt="cse"
           />
-        </div>
+        </div> */}
 
         <p className="text-center text-lg my-5">
           Already have an account?{" "}
